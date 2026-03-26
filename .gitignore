@@ -1,0 +1,64 @@
+### ─── 보안 / 시크릿 ───────────────────────────────────────
+# Firebase 설정 (API 키, 프로젝트 ID 포함)
+google-services.json
+GoogleService-Info.plist
+
+# Android 서명 키 및 인증서
+*.jks
+*.keystore
+*.p12
+*.pem
+keystore.properties
+signing.properties
+secrets.properties
+
+# 환경 변수 파일
+.env
+.env.*
+!.env.example
+
+### ─── Android / Kotlin ───────────────────────────────────
+*.iml
+.kotlin
+.gradle
+**/build/
+!src/**/build/
+local.properties
+captures
+.externalNativeBuild
+.cxx
+
+# 빌드 산출물
+*.apk
+*.aab
+*.aar
+*.dex
+*.class
+
+# 메모리 덤프
+*.hprof
+
+### ─── IDE ────────────────────────────────────────────────
+.idea
+.DS_Store
+
+### ─── iOS / Xcode ───────────────────────────────────────
+xcuserdata
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Xcode 빌드 결과물
+DerivedData/
+*.xcarchive
+*.ipa
+
+### ─── 기타 ──────────────────────────────────────────────
+node_modules/
