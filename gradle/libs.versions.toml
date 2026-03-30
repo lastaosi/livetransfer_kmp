@@ -72,6 +72,9 @@ compose-material-icons-extended = { module = "androidx.compose.material:material
 orhanobut-logger = { module = "com.orhanobut:logger", version.ref = "orhanobut-logger" }
 google-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 
+# libraries 섹션에 추가
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

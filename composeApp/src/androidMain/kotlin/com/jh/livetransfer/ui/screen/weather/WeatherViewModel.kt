@@ -3,7 +3,6 @@ package com.jh.livetransfer.ui.screen.weather
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jh.livetransfer.data.model.WeatherResponse
-import com.jh.livetransfer.data.repository.WeatherRepositoryImpl
 import com.jh.livetransfer.domain.usecase.weather.AddCityWeatherUseCase
 import com.jh.livetransfer.domain.usecase.weather.GetSavedCityNamesUseCase
 import com.jh.livetransfer.domain.usecase.weather.GetWeatherByCityUseCase

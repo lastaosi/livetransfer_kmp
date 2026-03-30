@@ -4,7 +4,6 @@ import com.jh.livetransfer.data.model.WeatherResponse
 import com.jh.livetransfer.data.remote.KTorClient
 import com.jh.livetransfer.data.source.local.CityDataStore
 import com.jh.livetransfer.domain.repository.WeatherRepository
-import com.jh.livetransfer.util.L
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -54,7 +53,6 @@ class WeatherRepositoryImpl (
                 parameter("units","metric")
                 parameter("lang","ko")
             }
-            L.d("날씨 응답 : ${response.bodyAsText()}")
             Result.success(response.body<WeatherResponse>())
         }catch (e:Exception){
             Result.failure(e)
@@ -62,7 +60,7 @@ class WeatherRepositoryImpl (
     }
 
     override fun getSavedCityNames(): Flow<List<String>> {
-        return cityDataStore.cityName
+        return cityDataStore.cityNames
     }
 
     override suspend fun saveCityNames(cities: List<String>) {

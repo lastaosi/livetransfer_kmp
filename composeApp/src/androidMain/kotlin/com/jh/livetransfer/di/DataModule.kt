@@ -1,9 +1,9 @@
 package com.jh.livetransfer.di
 
 import com.jh.livetransfer.data.repository.ExchangeRepositoryImpl
-import com.jh.livetransfer.data.repository.WeatherRepositoryImpl
 import com.jh.livetransfer.data.repository.SettingsRepository
 import com.jh.livetransfer.data.repository.TranslationRepositoryImpl
+import com.jh.livetransfer.data.repository.WeatherRepositoryImpl
 import com.jh.livetransfer.data.source.local.CityDataStore
 import com.jh.livetransfer.domain.repository.ExchangeRepository
 import com.jh.livetransfer.domain.repository.TranslationRepository
@@ -24,7 +24,7 @@ val dataModule = module {
     single<WeatherRepository> { WeatherRepositoryImpl(get<CityDataStore>()) }
     single<ExchangeRepository> { ExchangeRepositoryImpl() }
     single<TranslationRepository> { TranslationRepositoryImpl(get()) }
-    single { SettingsRepository(get()) }
+    single { SettingsRepository(androidContext()) }
     single { CityDataStore(get()) }
 
     single { AudioCaptureManager(androidContext()) }

@@ -14,7 +14,7 @@ import javax.inject.Inject
  * 도시 목록을 쉼표(",") 구분 문자열로 직렬화해 단일 키에 저장한다.
  * [WeatherRepositoryImpl]에 주입되어 사용된다.
  */
-class CityDataStore @Inject constructor(
+actual class CityDataStore(
     private val dataStore: DataStore<Preferences>
 ) {
     companion object{
@@ -23,7 +23,7 @@ class CityDataStore @Inject constructor(
     }
 
     /** DataStore에서 읽어온 도시 이름 Flow. 빈 문자열 항목은 자동 필터링. */
-    val cityName: Flow<List<String>> = dataStore.data.map { preferences ->
+    actual val cityNames: Flow<List<String>> = dataStore.data.map { preferences ->
         preferences[CITY_LIST_KEY]
             ?.split(SEPARATOR)
             ?.filter { it.isNotBlank() }
@@ -31,7 +31,7 @@ class CityDataStore @Inject constructor(
     }
 
     /** 도시 이름 목록을 쉼표 구분 문자열로 직렬화해 DataStore에 저장한다. */
-    suspend fun saveCityNames(cities: List<String>){
+    actual suspend fun saveCityNames(cities: List<String>){
         dataStore.edit { preferences ->
             preferences[CITY_LIST_KEY] = cities.joinToString(SEPARATOR)
         }

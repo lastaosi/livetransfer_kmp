@@ -1,7 +1,6 @@
 package com.jh.livetransfer.data.remote
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -14,12 +13,15 @@ import kotlinx.serialization.json.Json
  * - ContentNegotiation + kotlinx.serialization: JSON 응답을 data class로 자동 역직렬화
  * - ignoreUnknownKeys = true: API 응답에 모델에 없는 필드가 있어도 무시
  */
+expect fun createHttpClient(): HttpClient
 object KTorClient {
-    val client = HttpClient(Android) {
-        install(ContentNegotiation) {
-            json(Json {
-                ignoreUnknownKeys = true
-            })
+    val client: HttpClient by lazy{
+        createHttpClient().config {
+            install(ContentNegotiation){
+                json(Json {
+                    ignoreUnknownKeys = true
+                })
+            }
         }
     }
 }

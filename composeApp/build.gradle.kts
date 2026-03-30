@@ -57,6 +57,10 @@ kotlin {
             implementation(libs.google.gson)
         }
 
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
