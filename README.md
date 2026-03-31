@@ -209,6 +209,12 @@ TtsManager.speak()  ← 세션 종료 시 전체 텍스트 TTS 출력
 
 ---
 
+## 관련 문서
+
+- [KMP 개발 과정 및 트러블슈팅](docs/livetransfer_history.md)
+
+---
+
 ## 레퍼런스
 
 - [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)

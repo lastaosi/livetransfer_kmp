@@ -34,7 +34,7 @@ class WeatherRepositoryImpl (
                 parameter("q",city)
                 parameter("appid",apiKey)
                 parameter("units","metric") //섭씨
-                parameter("lang","kr")
+                parameter("lang","ko")
             }
             Result.success(response.body<WeatherResponse>())
 
@@ -59,10 +59,12 @@ class WeatherRepositoryImpl (
         }
     }
 
+    /** DataStore(Android) 또는 NSUserDefaults(iOS)에서 저장된 도시 목록을 Flow로 반환한다. */
     override fun getSavedCityNames(): Flow<List<String>> {
         return cityDataStore.cityNames
     }
 
+    /** 도시 목록을 DataStore(Android) 또는 NSUserDefaults(iOS)에 영구 저장한다. */
     override suspend fun saveCityNames(cities: List<String>) {
         cityDataStore.saveCityNames(cities)
     }

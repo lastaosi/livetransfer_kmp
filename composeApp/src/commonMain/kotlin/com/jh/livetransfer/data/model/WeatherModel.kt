@@ -1,5 +1,6 @@
 package com.jh.livetransfer.data.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /** OpenWeatherMap API /weather 응답 최상위 모델 */
@@ -22,7 +23,8 @@ data class Main(
 /** 날씨 상태 설명 */
 @Serializable
 data class Weather(
-    val description: String, // 날씨 설명 (lang=kr 설정 시 한국어 반환)
+    @SerialName("description")
+    val weatherDesc: String, // 날씨 설명 (lang=kr 설정 시 한국어 반환)
     val icon: String          // 날씨 아이콘 코드 (OpenWeatherMap 아이콘 URL 조합용)
 )
 

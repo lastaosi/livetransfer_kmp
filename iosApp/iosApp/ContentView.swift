@@ -4,7 +4,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        WeatherView()
+        TabView {
+            WeatherView()
+                .tabItem{
+                    Label("날씨", systemImage: "cloud.sun.fill")
+                }
+            ExchangeView()
+                .tabItem{
+                    Label("환율", systemImage: "dollarsign.circle.fill")
+                }
+        }
+        
     }
 }
 

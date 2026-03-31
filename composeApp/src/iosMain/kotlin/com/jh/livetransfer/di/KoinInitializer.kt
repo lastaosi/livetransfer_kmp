@@ -18,10 +18,21 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import org.koin.mp.KoinPlatform
 
+/**
+ * iOS용 Koin DI 초기화.
+ *
+ * Swift 진입점(iosApp.swift 등)에서 앱 시작 시 한 번만 호출해야 한다.
+ * Android의 startKoin { androidContext(...) }과 달리 Context가 필요 없으므로
+ * 파라미터 없이 호출 가능.
+ *
+ * - single: 앱 생명주기 동안 단일 인스턴스 유지 (Repository, DataStore)
+ * - factory: 호출마다 새 인스턴스 생성 (UseCase, ViewModel)
+ */
 fun initKoin(){
     startKoin {
         modules(
             module {
+                // iOS는 NSUserDefaults 기반 CityDataStore — 생성자 파라미터 없음
                 single { CityDataStore() }
 
                 single<WeatherRepository>{ WeatherRepositoryImpl(get())}
@@ -35,16 +46,17 @@ fun initKoin(){
                 factory { GetExchangeRatesUseCase(get()) }
                 factory { ConvertCurrencyUseCase() }
 
-                factory { WeatherViewModelIos(get(),get())}
+                factory { WeatherViewModelIos(get(),get(),get(),get())}
                 factory { ExchangeViewModelIos(get(),get()) }
             }
         )
     }
-
-
 }
+
+/** Swift에서 WeatherViewModelIos 인스턴스를 Koin 컨테이너에서 꺼내는 진입점. */
 fun getWeatherViewModel(): WeatherViewModelIos =
     KoinPlatform.getKoin().get()
 
+/** Swift에서 ExchangeViewModelIos 인스턴스를 Koin 컨테이너에서 꺼내는 진입점. */
 fun getExchangeViewModel(): ExchangeViewModelIos =
     KoinPlatform.getKoin().get()

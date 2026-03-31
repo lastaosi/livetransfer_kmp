@@ -59,8 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				E80A17B7919D87E22F822929 /* Configuration */,
-				26B4AC196F3614314A9C28BC /* iosApp */,
 				04DEA887C3B479AEC1B9BBB4 /* Products */,
+				26B4AC196F3614314A9C28BC /* iosApp */,
 			);
 			sourceTree = "<group>";
 		};

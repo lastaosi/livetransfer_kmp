@@ -30,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -162,6 +161,10 @@ private fun CurrentWeatherSection(weather: WeatherResponse) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
+                text = weatherEmoji(weather.weather.firstOrNull()?.icon ?: ""),
+                style = MaterialTheme.typography.displayMedium
+            )
+            Text(
                 text = weather.name,
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
@@ -173,7 +176,7 @@ private fun CurrentWeatherSection(weather: WeatherResponse) {
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = weather.weather.firstOrNull()?.description ?: "",
+                text = weather.weather.firstOrNull()?.weatherDesc ?: "",
                 style = MaterialTheme.typography.bodyLarge
             )
             Spacer(modifier = Modifier.height(16.dp))
@@ -206,6 +209,11 @@ private fun CityWeatherItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Text(
+                text = weatherEmoji(weather.weather.firstOrNull()?.icon ?: ""),
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = weather.name,
@@ -213,10 +221,22 @@ private fun CityWeatherItem(
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = weather.weather.firstOrNull()?.description ?: "",
+                    text = weather.weather.firstOrNull()?.weatherDesc ?: "",
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.Gray
                 )
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(
+                        text = "💧 ${weather.main.humidity}%",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Gray
+                    )
+                    Text(
+                        text = "💨 ${weather.wind.speed}m/s",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Gray
+                    )
+                }
             }
             Text(
                 text = "${weather.main.temp.toInt()}°C",
@@ -233,8 +253,29 @@ private fun CityWeatherItem(
             }
         }
     }
+
 }
 
+/**
+ * OpenWeatherMap 아이콘 코드 앞 두 자리를 기준으로 날씨 이모지를 반환한다.
+ * 아이콘 코드 예시: "01d"(맑음 낮), "01n"(맑음 밤) → 앞 두 자리 "01"만 사용.
+ */
+fun weatherEmoji(icon: String): String {
+    return when (icon.take(2)) {
+        "01" -> "☀️"
+        "02" -> "🌤️"
+        "03" -> "🌥️"
+        "04" -> "☁️"
+        "09" -> "🌧️"
+        "10" -> "🌦️"
+        "11" -> "⛈️"
+        "13" -> "❄️"
+        "50" -> "🌫️"
+        else -> "🌡️"
+    }
+}
+
+/** 체감온도·습도·풍속 등 단일 날씨 수치를 라벨과 함께 세로로 표시하는 컴포넌트. */
 @Composable
 private fun WeatherInfoItem(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
